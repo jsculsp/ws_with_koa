@@ -1,0 +1,4 @@
+.idea/
+*.pyc
+access-log
+node_modules/
