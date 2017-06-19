@@ -1,3 +1,6 @@
+/**
+ * Created by linmu on 2017/6/16.
+ */
 const path = require('path')
 const mime = require('mime')
 const fs = require('mz/fs')
