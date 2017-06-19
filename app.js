@@ -12,6 +12,7 @@ const staticFiles = require('./static_files')
 const WebSocketServer = ws.Server
 const app = new Koa()
 const log = console.log.bind(console)
+const err = console.log.bind(console, '**************ERR: ')
 
 app.use(async (ctx, next) => {
     log(`Process ${ctx.request.method} ${ctx.request.url}...`)
