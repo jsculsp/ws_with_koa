@@ -12,12 +12,7 @@ const staticFiles = require('./static_files')
 const WebSocketServer = ws.Server
 const app = new Koa()
 const log = console.log.bind(console)
-const err = console.log.bind(console, '**************ERR: ')
-
-app.use(async (ctx, next) => {
-    log(`Process ${ctx.request.method} ${ctx.request.url}...`)
-    await next()
-})
+const debug = console.log.bind(console, '**************DEBUG: ')
 
 app.use(async (ctx, next) => {
     let obj = ctx.cookies.get('name')
@@ -42,7 +37,6 @@ const parseUser = function (obj = '') {
     if (!obj) {
         return
     }
-    log(`try parse: ${obj}`)
     let s = ''
     if (typeof obj === 'string') {
         s = obj
@@ -53,7 +47,6 @@ const parseUser = function (obj = '') {
     if (s) {
         try {
             let user = JSON.parse(Buffer.from(s, 'base64').toString())
-            log(`User: ${user.name}, ID: ${user.id}`)
             return user
         } catch (e) {
             log(e)
@@ -105,7 +98,7 @@ const createMessage = function (type, user, data) {
     })
 }
 
-const onConnect = function () {
+const onConnection = function () {
     let user = this.user
     let msg = createMessage('join', user, `${user.name} joined.`)
     this.wss.broadcast(msg)
@@ -127,6 +120,6 @@ const onClose = function () {
     this.wss.broadcast(msg)
 }
 
-app.wss = createWebsocketServer(server, onConnect, onMessage, onClose)
+app.wss = createWebsocketServer(server, onConnection, onMessage, onClose)
 
 log(`app started at port 3000...`)

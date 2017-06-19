@@ -46,7 +46,7 @@ $(function () {
         }
     });
 
-    var ws = new WebSocket('ws://localhost:3000/ws/chat');
+    var ws = new WebSocket('ws://127.0.0.1:3000/ws/chat');
 
     ws.onmessage = function(event) {
         var data = event.data;
