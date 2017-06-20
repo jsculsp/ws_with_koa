@@ -33,7 +33,7 @@ app.use(templating('views', {
 
 app.use(controller())
 
-const server = app.listen(3000)
+const server = app.listen(2333)
 
 const parseUser = function (obj = '') {
     if (!obj) {
@@ -124,4 +124,4 @@ const onClose = function () {
 
 app.wss = createWebsocketServer(server, onConnection, onMessage, onClose)
 
-log(`app started at port 3000...`)
+log(`app started at port 2333...`)
