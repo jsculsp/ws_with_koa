@@ -6,9 +6,11 @@ const ws = require('ws')
 const Cookies = require('cookies')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
+
 const controller = require('./controller')
 const templating = require('./templating')
 const staticFiles = require('./static_files')
+
 const WebSocketServer = ws.Server
 const app = new Koa()
 const log = console.log.bind(console)
